@@ -2,7 +2,7 @@ import json
 import os
 from collections import namedtuple
 
-import matlab.engine
+from evaluation.python_eval.MarketEvalForPath import evalMarketWithPath
 import tensorflow as tf
 
 MatlabEvaluationResult = namedtuple('MatlabEvaluationResult', 'mAP,rank1,rank5,rank10,rank50')
@@ -12,11 +12,11 @@ EVALUATION_RESULT_FILE_NAME = 'evaluation.json'
 def run_matlab_evaluation(path):
 	print('Running Matlab evaluation for path %s' % path)
 
-	eng = matlab.engine.start_matlab()
-	eng.cd(r'evaluation/matlab')
+	#eng = matlab.engine.start_matlab()
+	#eng.cd(r'evaluation/matlab')
 
 	print('Running market evaluation...')
-	eval_result = eng.MarketEvalForPath(path)
+	eval_result = evalMarketWithPath(path)
 
 	ranks = eval_result['rec_rates'][0]
 	return MatlabEvaluationResult(mAP=eval_result['mAP'], rank1=ranks[0], rank5=ranks[4], rank10=ranks[9], rank50=ranks[49])
