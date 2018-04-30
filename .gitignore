@@ -1,3 +1,6 @@
+#vscode
+.vscode
+
 #testFiles for re-ranking python implementation
 test-evaluation-py.py
 evaluation/Market1501
