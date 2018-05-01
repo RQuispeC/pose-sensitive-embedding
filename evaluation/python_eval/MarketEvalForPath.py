@@ -5,11 +5,14 @@ from evaluation.python_eval.evaluation import evaluation
 
 def readCSV(path):
     output = []
-    with open(path, 'rb') as csvfile:
+    with open(path, 'r') as csvfile:
         spamreader = csv.reader(csvfile, delimiter=',')
         for row in spamreader:
-            output.append(row)
-    return np.array(output)
+            if len(row) == 1:
+                output.append(row[0])
+            else:
+                output.append(row)
+    return np.array(output).astype(np.double)
 
 def evalMarketWithPath(evalPath):
     querymat=readCSV(evalPath + '/query/features.csv')
@@ -25,6 +28,7 @@ def evalMarketWithPath(evalPath):
     noRerankingDist = spatial.distance.cdist(testmat, querymat, 'cosine')
     rec_rates, mAP, _, _ = evaluation(noRerankingDist, testLab, queryLab, testCam, queryCam)
 
-    result.rec_rates = 100 * rec_rates
-    result.mAP = 100 * mAP
+    result = dict()
+    result['rec_rates'] = 100 * rec_rates
+    result['mAP'] = 100 * mAP
     return result

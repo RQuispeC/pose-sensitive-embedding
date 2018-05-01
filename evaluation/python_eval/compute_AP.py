@@ -2,7 +2,7 @@
 import numpy as np
 
 def compute_AP(good_image, junk_image, index):
-    cmc = np.zeros((len(index), 1))
+    cmc = np.zeros((len(index)))
     ngood = len(good_image)
 
     old_recall = 0
@@ -32,5 +32,5 @@ def compute_AP(good_image, junk_image, index):
         j = j + 1 
         
         if good_now == ngood:
-            return
+            break
     return ap, cmc

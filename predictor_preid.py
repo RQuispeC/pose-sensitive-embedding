@@ -55,11 +55,11 @@ def run_prediction_and_evaluation(batch_size, batch_threads, dataset_factory, es
 
 	print('Finished feature vector generation.')
 
-	print('Running Matlab evaluation...')
+	print('Running Python evaluation...')
 	evaluation_result = run_matlab_evaluation(output_directory)
 	save_matlab_evaluation(output_directory, evaluation_result)
 
-	print('Finished Matlab evaluation.')
+	print('Finished Python evaluation.')
 	print(evaluation_result)
 	return evaluation_result
 
