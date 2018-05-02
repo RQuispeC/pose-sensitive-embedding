@@ -18,7 +18,9 @@ def run_matlab_evaluation(path):
 	print('Running market evaluation...')
 	eval_result = evalMarketWithPath(path)
 
-	ranks = eval_result['rec_rates'][0]
+	ranks = eval_result['rec_rates']
+
+	print(MatlabEvaluationResult(mAP=eval_result['mAP'], rank1=ranks[0], rank5=ranks[4], rank10=ranks[9], rank50=ranks[49]))
 	return MatlabEvaluationResult(mAP=eval_result['mAP'], rank1=ranks[0], rank5=ranks[4], rank10=ranks[9], rank50=ranks[49])
 
 
